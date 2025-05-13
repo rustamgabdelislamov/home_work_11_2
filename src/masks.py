@@ -1,12 +1,13 @@
 from decorators.log import log
 
+
 @log(filename="log.txt")
 def get_mask_card_number(card_number: str) -> str:
     """Функция скрывающая полный номер карты"""
 
     if len(card_number) == 16 and card_number.isdigit():
         return f'{card_number[0:4]} {card_number[4:6]}** **** {card_number[12:]}'
-    raise ValueError('Неправильный номер карты')
+    return 'Неправильный номер карты'
 
 
 def get_mask_account(account: str) -> str:
@@ -14,8 +15,7 @@ def get_mask_account(account: str) -> str:
 
     if len(account) == 20 and account.isdigit():
         return f'**{account[-4:]}'
-    raise ValueError('Неправильный номер счета')
-
+    return 'Неправильный номер счета'
 
 
 print(get_mask_card_number("1234567812345678"))  # Должно вернуть замаскированный номер и записать в лог
