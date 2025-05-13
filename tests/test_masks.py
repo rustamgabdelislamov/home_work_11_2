@@ -15,4 +15,3 @@ def test_get_mask_card_number():
 
 def test_get_mask_card_number_len_figure():
     assert get_mask_card_number('70007922896063') == 'Неправильный номер карты'
-
