@@ -1,7 +1,7 @@
 import time
 
 
-def log(filename):
+def log(filename=""):
     def my_decorator(func):
         def inner(*args, **kwargs):
             time_1 = time.time()
