@@ -1,43 +1,39 @@
 from decorators.log import log
-from src.masks import get_mask_card_number
+import pytest
+
 
 
 @log("log.txt")
-def get_mask_card_number(card_number: str) -> str:
-    """Функция скрывающая полный номер карты"""
-
-    if len(card_number) == 16 and card_number.isdigit():
-        return f'{card_number[0:4]} {card_number[4:6]}** **** {card_number[12:]}'
-    return 'Неправильный номер карты'
+def div(a, b):
+    if b == 0:
+        raise ZeroDivisionError("division by zero")
+    return a / b
 
 
-def test_ok_number():
-    assert get_mask_card_number("1234123412341234") == "1234 12** **** 1234"
+def test_b_not_zero():
+    assert div(2,1) == 2.0
 
 
-def test_error():
-    assert get_mask_card_number("12345") == "Неправильный номер карты"
+def test_b_zero():
+    with pytest.raises(ZeroDivisionError):
+        div(2,0)
 
 
-def test_ok_number_(capsys):
-    # Вызов функции с корректным номером карты
-    result = get_mask_card_number("1234123412341234")
+def test_b_not_zero_(capsys):
+    result = div(2,1)
 
-    # Проверка результата
-    assert result == "1234 12** **** 1234"
+    assert result == 2.0
 
-    # Проверка вывода в лог
     captured = capsys.readouterr()
-    assert "get_mask_card_number ok" in captured.out
+    assert "div ok" in captured.out
 
 
-def test_error_(capsys):
-    # Вызов функции с некорректным номером карты
-    result = get_mask_card_number("12345")
+def test_b_zero_(capsys):
+    with pytest.raises(ZeroDivisionError) as excinfo:
+        div(2, 0)
 
-    # Проверка результата
-    assert result == "Неправильный номер карты"
+    assert str(excinfo.value) == "division by zero"
 
-    # Проверка вывода в лог
+    # Проверяем, что логирование произошло
     captured = capsys.readouterr()
-    assert "get_mask_card_number error: Неправильный номер карты. Inputs: 12345" in captured.out
+    assert "div error: division by zero. Inputs: 2, 0" in captured.out

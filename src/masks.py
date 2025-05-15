@@ -1,7 +1,7 @@
 from decorators.log import log
 
 
-@log(filename="log.txt")
+
 def get_mask_card_number(card_number: str) -> str:
     """Функция скрывающая полный номер карты"""
 
@@ -17,6 +17,9 @@ def get_mask_account(account: str) -> str:
         return f'**{account[-4:]}'
     return 'Неправильный номер счета'
 
+
+def div(a, b):
+    return a / b
 
 print(get_mask_card_number("1234567812345678"))  # Должно вернуть замаскированный номер и записать в лог
 print(get_mask_card_number("12345"))              # Должно вызвать исключение и записать в лог
