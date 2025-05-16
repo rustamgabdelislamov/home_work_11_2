@@ -13,17 +13,14 @@ def log(filename=""):
                 if filename:
                     with open(filename, 'a', encoding='utf-8') as file:
                         file.write(log_message + '\n')
-                    print(log_message)
                 else:
                     print(log_message)
                 return result
             except Exception as e:
-                inputs = ", ".join(map(str, args))
-                error_message = f"{func.__name__} error: {e}. Inputs: {inputs}"
+                error_message = f"{func.__name__} error: {e}. Inputs: {args, kwargs}"
                 if filename:
                     with open(filename, 'a', encoding='utf-8') as file:
                         file.write(error_message + '\n')
-                    print(error_message)
                 else:
                     print(error_message)
                 raise
