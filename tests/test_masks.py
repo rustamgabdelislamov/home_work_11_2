@@ -6,7 +6,7 @@ def test_get_mask_account(numbers):
 
 
 def test_get_mask_account_len_figure(len_figure):
-    assert get_mask_account('111111111111111112') == len_figure
+    assert get_mask_account('111111111111111112') == "Неправильный номер счета"
 
 
 def test_get_mask_card_number():
